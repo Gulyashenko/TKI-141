@@ -1,4 +1,0 @@
-﻿  Task1-2.c
-C:\Users\IGuly\source\repos\Task1-2\Task1-2\Task1-2.c(51,581): warning C4244: return: преобразование "double" в "float", возможна потеря данных
-C:\Users\IGuly\source\repos\Task1-2\Task1-2\Task1-2.c(55,501): warning C4244: return: преобразование "double" в "float", возможна потеря данных
-  Task1-2.vcxproj -> C:\Users\IGuly\source\repos\Task1-2\x64\Debug\Task1-2.exe
