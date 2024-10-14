@@ -18,7 +18,7 @@ int input(void);
  */
 int main(void)
 {
-    printf("введите название фигуры(число от 1 до 5:\t");
+    printf("введите название фигуры(число от 1 до 5):\t");
     int figure_name = input();
     
     switch (figure_name) {
@@ -32,10 +32,13 @@ int main(void)
         printf("формула площади прямоугольника");
         break;
     case Trapeciya:
-        printf("формула формула трапеции");
+        printf("формула площади трапеции");
         break;
     case Parallelogram:
-        printf("формула трапеции параллелограма");
+        printf("формула площади параллелограма");
+        break;
+    default: 
+        printf("input error, try again");
         break;
     }
 
@@ -44,7 +47,7 @@ int main(void)
 
 int input(void) {
     int number;
-    if (scanf_s("%lf", &number) != 1) {
+    if (scanf_s("%f", &number) != 1) {
         printf("input error");
         exit(EXIT_FAILURE);
     }
