@@ -3,42 +3,114 @@
 /**
 @brief перечисление названий дней недели
 */
-enum days { Monday = 1, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday };
+enum days {
+    Monday = 1,
+    Tuesday = 2,
+    Wednesday = 3,
+    Thursday = 4,
+    Friday = 5,
+    Saturday = 6,
+    Sunday = 7
+};
 
 /**
 @brief перечисление названий месяцев
 */
-enum months { January = 1, February, March, April, May, June, July, August, September, October, November, December };
+enum months { 
+    January = 1,
+    February = 2,
+    March = 3,
+    April = 4, 
+    May = 5,
+    June = 6,
+    July = 7,
+    August = 8,
+    September = 9,
+    October = 10,
+    November = 11,
+    December = 12
+};
 
 int input(void);
-
-/**
-@brief Функция для нахождения названия дня недели относительно введённого числа
-@param Параметр month - вводимое число, означающее день недели
-@return Возвращает название дня недели относительно введённого числа
-*/
-const char* func_for_day(int day);
-
-/**
-@brief Функция для нахождения названия месяца относительно введённого числа
-@param Параметр month - вводимое число, означающее месяц
-@return Возвращает название месяца относительно введённого числа
-*/
-const char* func_for_month(int month);
 
 /**
 @brief Точка входа в программу
 @return Возвращает в случае успеха
 */
 int main(void) {
-    int day, month;
     printf("Print the number of day (from 1 till 7):\t");
-    day = input();
+    int day = input();
     printf("Print the number of month (from 1 till 12):\t");
-    month = input();
+    int month = input();
 
-    printf("Day:\t%s\n", func_for_day(day));
-    printf("Month:\t%s", func_for_month(month));
+    switch (day) {
+    case Monday:
+        printf("Monday\n");
+        break;
+    case Tuesday:
+        printf("Tuesday\n");
+        break;
+    case Wednesday:
+        printf("Wednesday\n");
+        break;
+    case Thursday:
+        printf("Thursday\n");
+        break;
+    case Friday:
+        printf("Friday\n");
+        break;
+    case Saturday:
+        printf("Saturday\n");
+        break;
+    case Sunday:
+        printf("Sunday\n");
+        break;
+    default:
+        printf("Invalid input, try again\n");
+        break;
+    }
+
+    switch (month) {
+    case January:
+        printf("January");
+        break;
+    case February:
+        printf("February");
+        break;
+    case March:
+        printf("March");
+        break;
+    case April:
+        printf("April");
+        break;
+    case May:
+        printf("May");
+        break;
+    case June:
+        printf("June");
+        break;
+    case July:
+        printf("July");
+        break;
+    case August:
+        printf("August");
+        break;
+    case September:
+        printf("September");
+        break;
+    case October:
+        printf("October");
+        break;
+    case November:
+        printf("November");
+        break;
+    case December:
+        printf("December");
+        break;
+    default:
+        printf("Invalid input, try again");
+        break;
+    }
 
     return 0;
 }
@@ -50,56 +122,4 @@ int input(void) {
         exit(EXIT_FAILURE);
     }
     return number;
-}
-
-const char* func_for_day(int day) {
-    switch (day) {
-    case Monday:
-        return "Monday";
-    case Tuesday:
-        return "Tuesday";
-    case Wednesday:
-        return "Wednesday";
-    case Thursday:
-        return "Thursday";
-    case Friday:
-        return "Friday";
-    case Saturday:
-        return "Saturday";
-    case Sunday:
-        return "Sunday";
-    default:
-        return "Invalid input, try again";
-    }
-}
-
-const char* func_for_month(int month) {
-    switch (month) {
-    case January:
-        return "January";
-    case February:
-        return "February";
-    case March:
-        return "March";
-    case April:
-        return "April";
-    case May:
-        return "May";
-    case June:
-        return "June";
-    case July:
-        return "July";
-    case August:
-        return "August";
-    case September:
-        return "September";
-    case October:
-        return "October";
-    case November:
-        return "November";
-    case December:
-        return "December";
-    default:
-        return "Invalid input, try again";
-    }
 }
