@@ -67,6 +67,7 @@ int main(void) {
         break;
     default:
         printf("Invalid input, try again\n");
+        return 1;
         break;
     }
 
@@ -109,6 +110,7 @@ int main(void) {
         break;
     default:
         printf("Invalid input, try again");
+        return 1;
         break;
     }
 
