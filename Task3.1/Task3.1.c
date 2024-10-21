@@ -13,7 +13,7 @@ double input(void);
 * @param x_end значение х на котором закончится табулирование функции
 * @param x_delta значение шага между значениями табулирования функции
 */
-void func_for_y(double x_start, double x_end, double x_delta);
+void func_for_y(const double x_start,const double x_end,const double x_delta);
 
 /**
 * @brief точка входа в программу
@@ -40,8 +40,8 @@ double input(void) {
 	return number;
 }
 
-void func_for_y(double x_start, double x_end, double x_delta) {
-	for (double x = x_start; x <= x_end; x += x_delta) {
+void func_for_y(const double x_start,const double x_end,const double x_delta) {
+	for (double x = x_start; x < x_end+x_delta; x += x_delta) {
 		const double y = x - x / 3 + x / 5 - 1 / 3;
 		printf("%lf|%lf\n", x_start, y);
 	}
