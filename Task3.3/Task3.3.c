@@ -2,12 +2,34 @@
 #include <stdlib.h>
 #include <math.h>
 
+/**
+* @brief функция для нахождения значения параметра y
+* @param x_start начальное значение параметра x
+* @param x_end конечное значение параметра x
+* @param x_delta значение шага для параметра x
+* @return возвращает значение параметра y
+*/
 double func_for_finding_y(const double x_start, const double x_end, const double x_delta);
 
+/**
+* @brief считает значение рекурентного соотношения 
+* @param x значение параметра x
+* @param n значение параметра n
+* @param x_delta значение параметра x_delta (шаг для параметра x)
+* @return возвращает значение рекурентного соотношения
+*/
 double recurrent(double x, int n, double x_delta);
 
+/**
+@brief проверяет вводимое значение, является ли оно числом
+@return Возвращает введённое значение, если оно является числом
+*/
 double input(void);
 
+/**
+@brief Точка входа в программу
+@return Возвращает в случае успеха
+*/
 int main(void) {
 	const double x_start = input();
 	const double x_end = input();
