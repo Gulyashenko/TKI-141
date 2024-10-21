@@ -8,7 +8,7 @@
  * @param a - константа
  * @return возвращает значение найденного y
  */
-double func_for_y(double a, double x);
+double func_for_y(const double a, const double x);
 
 /**
  * @brief позволяет ввести значение и проверяет его(является ли числом)
@@ -38,7 +38,7 @@ double input(void) {
     return number;
 }
 
-double func_for_y(double a, double x) {
+double func_for_y(const double a, const double x) {
     if (x < 1) {
         return log(x + 1);
     }
