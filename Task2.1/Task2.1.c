@@ -38,9 +38,9 @@ int input(void);
 @return Возвращает в случае успеха
 */
 int main(void) {
-    printf("Print the number of day (from 1 till 7):\t");
+    printf("Print the number of day (from Monday till Sunday):\t");
     int day = input();
-    printf("Print the number of month (from 1 till 12):\t");
+    printf("Print the number of month (from January till December):\t");
     int month = input();
 
     switch (day) {
