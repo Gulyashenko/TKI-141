@@ -4,7 +4,29 @@
 /**
 * @brief перечисление фигур
 */
-enum figures{Treugolnik = 1, Kvadrat, Pryamougolnik, Trapeciya, Parallelogram};
+enum figures
+{
+    /**
+    *@brief треугольник
+    */
+    Triangle = 1,
+    /**
+    * @brief квадрат
+    */
+    Square, 
+    /**
+    * @brief прямоугольник
+    */
+    Rectangle,
+    /**
+    * @brief трапеция
+    */
+    Trapeze, 
+    /**
+    * @brief параллелограм
+    */
+    Parallelogram
+};
 
 /**
  * @brief позволяет ввести значение и проверяет его(является ли числом)
@@ -22,20 +44,20 @@ int main(void)
     int figure_name = input();
     
     switch (figure_name) {
-    case Treugolnik:
-        printf("формула площади треугольника");
+    case Triangle:
+        printf("формула площади треугольника S = 0.5*h*a");
         break;
-    case Kvadrat:
-        printf("формула площади квадрата");
+    case Square:
+        printf("формула площади квадрата S = a*a");
         break;
-    case Pryamougolnik:
-        printf("формула площади прямоугольника");
+    case Rectangle:
+        printf("формула площади прямоугольника S = a*b");
         break;
-    case Trapeciya:
-        printf("формула площади трапеции");
+    case Trapeze:
+        printf("формула площади трапеции S = 0.5*(a+b)*h");
         break;
     case Parallelogram:
-        printf("формула площади параллелограма");
+        printf("формула площади параллелограма  S = a*b*cos(a^b)");
         break;
     default: 
         printf("input error, try again");
