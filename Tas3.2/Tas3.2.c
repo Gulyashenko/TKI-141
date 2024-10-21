@@ -27,7 +27,7 @@ double recurrent(int k);
 @brief проверяет вводимое значение, является ли оно числом
 @return Возвращает введённое значение, если оно является числом
 */
-int input(void);
+double input(void);
 
 /**
  * @brief Точка входа в программу.
@@ -63,6 +63,7 @@ double func_for_finding_summ_1(int n) {
 }
 
 double func_for_finding_summ_2(int n, double e) {
+
 	/**
 	@param summ значение суммы элементов последовыательности
 	*/
@@ -73,30 +74,26 @@ double func_for_finding_summ_2(int n, double e) {
 	*/
 	double current = 1.0;
 
-	if (e > 1.0) {
-		return 0;
-	}
-	else {
-		for (int k = 0; k <= n; k++) {
-			current *= recurrent(k);
+	for (int k = 0; k <= n; k++) {
+		current *= recurrent(k);
 
-			if (current >= e) {
-				summ += current;
-			}
-
+		if (current >= e) {
+			summ += current;
 		}
-
-		return summ;
+		else {
+			summ+=0;
+		}
 	}
+	 return summ;
 }
 
 double recurrent(int k) {
 	return 1 / (double)(4 * k * k + 6 * k + 2);
 }
 
-int input(void) {
-	int number = 0;
-	if (scanf_s("%i", &number) != 1) {
+double input(void) {
+	double number = 0;
+	if (scanf_s("%lf", &number) != 1) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
