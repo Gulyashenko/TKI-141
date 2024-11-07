@@ -1,12 +1,13 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 
 /**
 * @brief вычисляет сумму первых n членов последовательности (k = 1, 2, 3 ..., n).
 * @param n значение последнего члена последовательности
 * @return возвращает сумму первых n членов последовательности (k = 1, 2, 3 ..., n)
 */
-double func_for_finding_summ_1(int n);
+double func_for_finding_summ_1(const int n);
 
 /**
 * @brief вычисляет сумму всех членов последовательности, не меньших заданного числа e
@@ -14,14 +15,14 @@ double func_for_finding_summ_1(int n);
 * @param e значение параметра e
 * @return возвращает сумму всех членов последовательности, не меньших заданного числа e
 */
-double func_for_finding_summ_2(int n, double e);
+double func_for_finding_summ_2(const int n,const double e);
 
 /**
 * @brief вычисляет рекуррентное соотношение относительно данного значения элемента последовательности
 * @param k значение данного элемента последовательности
 * @return возвращает полученное значение
 */
-double recurrent(int k);
+double recurrent(const int k);
 
 /**
 @brief проверяет вводимое значение, является ли оно числом
@@ -41,53 +42,34 @@ int main(void) {
 	double e = input();
 
 	printf("%lf\n%lf", func_for_finding_summ_1(n), func_for_finding_summ_2(n, e));
+
+	return 0;
 }
 
-double func_for_finding_summ_1(int n) {
-	/**
-	@param summ значение суммы элементов последовыательности
-	*/
-	double summ = 1.0; 
-
-	/**
-	@param current значение элемента последовательности(1 / (2 * k)!)
-	*/
+double func_for_finding_summ_1(const int n) {
 	double current = 1.0;
+	double summ = current; 
 
-	for (int k = 0; k <= n; k++) {
+	for (int k = 0; k < n; k++) {
 		current *= recurrent(k);
 		summ += current;
 	}
-
 	return summ;
 }
 
-double func_for_finding_summ_2(int n, double e) {
+double func_for_finding_summ_2(const int n,const double e) {
 
-	/**
-	@param summ значение суммы элементов последовыательности
-	*/
-	double summ = 1.0;
-
-	/**
-	@param current значение элемента последовательности(1 / (2 * k)!)
-	*/
 	double current = 1.0;
+	double summ = current;
 
-	for (int k = 0; k <= n; k++) {
+	for (int k = 0; current<e+DBL_EPSILON <= n; k++) {
 		current *= recurrent(k);
-
-		if (current >= e) {
-			summ += current;
-		}
-		else {
-			summ+=0;
-		}
+		summ += current;
 	}
 	 return summ;
 }
 
-double recurrent(int k) {
+double recurrent(const int k) {
 	return 1 / (double)(4 * k * k + 6 * k + 2);
 }
 
