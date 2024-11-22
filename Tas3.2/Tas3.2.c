@@ -41,6 +41,11 @@ int main(void) {
 	printf("введите значение e:\t");
 	double e = input();
 
+	if (n < 0 || e <= 0) {
+		printf("input error");
+		exit(EXIT_FAILURE);
+	}
+
 	printf("%lf\n%lf", func_for_finding_summ_1(n), func_for_finding_summ_2(e));
 
 	return 0;
@@ -53,7 +58,6 @@ double func_for_finding_summ_1(const int n) {
 	for (int k = 0; k < n; k++) {
 		current *= recurrent(k);
 		summ += current;
-		//printf("%lf", &summ);
 	}
 	printf("конец первой функции");
 	return summ;
@@ -62,13 +66,11 @@ double func_for_finding_summ_1(const int n) {
 double func_for_finding_summ_2(const double e) {
 
 	double current = 1;
-	double summ = current;
+	double summ = 0;
 
-	for (int k = 0; abs(current)>e-DBL_EPSILON; k++) {
-		current *= recurrent(k);
+	for (int k = 0; fabs(current)>e-DBL_EPSILON; k++) {
 		summ += current;
-		
-		//printf("%lf", &current);
+		current *= recurrent(k);
 	}
 	printf("конец второй функции");
 	 return summ;
