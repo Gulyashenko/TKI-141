@@ -28,13 +28,19 @@ double recurrent(const int k);
 @brief проверяет вводимое значение, является ли оно числом и больше ли нуля
 @return Возвращает введённое значение, если оно является числом и больше нуля
 */
-int input_n(void);
+double input(void);
 
 /**
-@brief проверяет вводимое значение, является ли оно числом и больше ли нуля
-@return Возвращает введённое значение, если оно является числом и больше нуля
+@brief проверяет параметр e, больше ли нуля, и вводит его
+@return возвращает значение e если оно больше нуля
 */
-double input_e(void);
+double true_e(void);
+
+/**
+@brief проверяет параметр n, больше ли нуля, и вводит его
+@return возвращает значение n если оно больше нуля
+*/
+int true_n(void);
 
 /**
  * @brief Точка входа в программу.
@@ -43,9 +49,9 @@ double input_e(void);
 int main(void) {
 
 	printf("введите значение n:\t");
-	int n = input_n(); 
+	int n = true_n(); 
 	printf("введите значение e:\t");
-	double e = input_e(); 
+	double e = true_e(); 
 
 	printf("%lf\n%lf", func_for_finding_summ_1(n), func_for_finding_summ_2(e));
 
@@ -79,20 +85,27 @@ double recurrent(const int k) {
 	return -1.0 / (4 * k * k + 6 * k + 2);
 }
 
-int input_n(void) {
-	int number = 0;
-	if (scanf_s("%i", &number) != 1 && number < 0) {
+double input(void) {
+	double number = 0;
+	if (scanf_s("%lf", &number) != 1) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
 	return number;
 }
 
-double input_e(void) {
-	double number = 0;
-	if (scanf_s("%lf", &number) != 1 && number<=0+DBL_EPSILON) {
+double true_e(void) {
+	double e = input();
+	if (e <= DBL_EPSILON) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
-	return number;
+}
+
+int true_n(void) {
+	int n = input();
+	if (n < 0) {
+		printf("input error");
+		exit(EXIT_FAILURE);
+	}
 }
