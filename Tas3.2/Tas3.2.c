@@ -25,10 +25,16 @@ double func_for_finding_summ_2(const double e);
 double recurrent(const int k);
 
 /**
-@brief проверяет вводимое значение, является ли оно числом
-@return Возвращает введённое значение, если оно является числом
+@brief проверяет вводимое значение, является ли оно числом и больше ли нуля
+@return Возвращает введённое значение, если оно является числом и больше нуля
 */
-double input(void);
+int input_n(void);
+
+/**
+@brief проверяет вводимое значение, является ли оно числом и больше ли нуля
+@return Возвращает введённое значение, если оно является числом и больше нуля
+*/
+double input_e(void);
 
 /**
  * @brief Точка входа в программу.
@@ -37,14 +43,9 @@ double input(void);
 int main(void) {
 
 	printf("введите значение n:\t");
-	int n = input();
+	int n = input_n(); 
 	printf("введите значение e:\t");
-	double e = input();
-
-	if (n < 0 || e <= 0) {
-		printf("input error");
-		exit(EXIT_FAILURE);
-	}
+	double e = input_e(); 
 
 	printf("%lf\n%lf", func_for_finding_summ_1(n), func_for_finding_summ_2(e));
 
@@ -59,7 +60,6 @@ double func_for_finding_summ_1(const int n) {
 		current *= recurrent(k);
 		summ += current;
 	}
-	printf("конец первой функции");
 	return summ;
 }
 
@@ -72,17 +72,25 @@ double func_for_finding_summ_2(const double e) {
 		summ += current;
 		current *= recurrent(k);
 	}
-	printf("конец второй функции");
 	 return summ;
 }
 
 double recurrent(const int k) {
-	return pow(-1, k) / (double)(4 * k * k + 6 * k + 2);
+	return -1.0 / (4 * k * k + 6 * k + 2);
 }
 
-double input(void) {
+int input_n(void) {
+	int number = 0;
+	if (scanf_s("%i", &number) != 1 && number < 0) {
+		printf("input error");
+		exit(EXIT_FAILURE);
+	}
+	return number;
+}
+
+double input_e(void) {
 	double number = 0;
-	if (scanf_s("%lf", &number) != 1) {
+	if (scanf_s("%lf", &number) != 1 && number<=0+DBL_EPSILON) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
