@@ -66,8 +66,9 @@ void more_el_index_print(int* mass, const size_t size);
 /**
 * @brief функция для определения присутствия хотя бы двух пар соседних элементов с одным и тем же знаком
 * @param массив с которым мы работаем
+* @return возвращает количество пар элементов с одним и тем же знаком
 */
-void two_pairs(int* mass, const size_t size);
+int two_pairs(int* mass, const size_t size);
 
 /**
 * @brief Функция для ручного ввода элементов массива
@@ -106,11 +107,12 @@ int main(void) {
 	int input_choise = input("введите вариант ввода элементов массива (ручной - 1, рандомный - 2)");
 	int max_l = input("введите максимальное допустимое значение элемента массива");
 	int min_l = input("введите минимальное допустимое значение элемента массива");
+	true_interval(min_l, max_l);
+
 	const size_t size = input("Введите длинну массива");
 
 	int* mass = mass_inicialisation(input_choise, size, min_l, max_l);
 
-	true_interval(min_l, max_l);
 	true_size(size);
 
 	printf("ответ на задание 1");
@@ -154,19 +156,19 @@ void replace_min_el_mid_el(int* mass, const size_t size) {
 void more_el_index_print(int* mass, const size_t size) {
 	for (size_t i = 1; i < size; ++i) {
 		if (mass[i - 1] < mass[i]) {
-			printf("%i\t", i);
+			printf("%d\t", i);
 		}
 	}
 }
 
-void two_pairs(int* mass, const size_t size) {
+int two_pairs(int* mass, const size_t size) {
 	int value_pairs = 0;
 	for (int i = 1; i < size; ++i) {
-		if ((mass[i - 1] < 0 && mass[i] < 0) || (mass[i - 1] == 0 && mass[i] == 0) || (mass[i - 1] > 0 && mass[i] > 0)) {
+		if (mass[i]*mass[i-1] > 0) {
 			value_pairs++;
 		}
 	}
-	printf("%i", value_pairs);
+	return value_pairs;
 }
 
 void print_mass(int* mass, const size_t size)
