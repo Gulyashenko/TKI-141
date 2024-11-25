@@ -110,13 +110,16 @@ int* mass_inicialisation(const int input_choise, const size_t size, const int mi
 * @return возвращает в случае успеха
 */
 int main(void) {
-	int input_choise = input("введите вариант ввода элементов массива");
-	int task_choise = input("введите номер задания которое надо выполнить (1, 2 или 3)");
+	int input_choise = input("введите вариант ввода элементов массива (ручной - 1, рандомный - 2)");
 	int max_l = input("введите максимальное допустимое значение элемента массива");
 	int min_l = input("введите минимальное допустимое значение элемента массива");
 	const size_t size = input("Введите длинну массива");
 
 	int* mass = mass_inicialisation(input_choise, size, min_l, max_l);
+
+	true_interval(min_l, max_l);
+	true_size(size);
+	true_mass(mass);
 
 	printf("ответ на задание 1");
 	replace_min_el_mid_el(mass, size);
@@ -235,7 +238,6 @@ void random_mass_input(int* mass, const size_t size, const int min_l, const int 
 
 int* mass_inicialisation(const int input_choise, const size_t size, const int min_l, const int max_l) {
 	int* mass = (int*)malloc(size * sizeof(int));
-	int* mass1 = (int*)malloc(size * sizeof(int));
 	if (mass == NULL)
 	{
 		printf("Ошибка: недостаточно памяти.\n");
