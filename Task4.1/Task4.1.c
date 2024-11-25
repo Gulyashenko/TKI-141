@@ -37,13 +37,6 @@ void print_mass(int* mass, const size_t size);
 void true_interval(const int min_l, const int max_l);
 
 /**
-* @brief Функция для проверки массива.
-* @param массив.
-* @remarks завершение программы, в случае несуществования массива.
-*/
-void true_mass(int* mass);
-
-/**
 * @brief Функция для проверки длинны массива.
 * @param int_size - длинна массива.
 * @remarks Экстренное завершение программы, в случае неправильной длинны массива.
@@ -119,7 +112,6 @@ int main(void) {
 
 	true_interval(min_l, max_l);
 	true_size(size);
-	true_mass(mass);
 
 	printf("ответ на задание 1");
 	replace_min_el_mid_el(mass, size);
@@ -182,15 +174,6 @@ void print_mass(int* mass, const size_t size)
 	for (size_t i = 0; i < size; i++)
 	{
 		printf("%Iu %d\n", i, mass[i]);
-	}
-}
-
-void true_mass(int* mass)
-{
-	if (mass == NULL)
-	{
-		printf("Input error");
-		exit(EXIT_FAILURE);
 	}
 }
 
