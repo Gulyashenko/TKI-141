@@ -100,6 +100,7 @@ double true_e(void) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
+	return e;
 }
 
 int true_n(void) {
@@ -108,4 +109,5 @@ int true_n(void) {
 		printf("input error");
 		exit(EXIT_FAILURE);
 	}
+	return n;
 }
