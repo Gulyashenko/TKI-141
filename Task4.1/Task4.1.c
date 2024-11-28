@@ -27,7 +27,7 @@ int input(const char* message);
 * @param size - длинна массива.
 * @return Массив.
 */
-void print_mass(int* mass, const size_t size);
+void print_mass(const int* mass, const size_t size);
 
 /**
 * @brief Функция проверки интервала массива на правильность.
@@ -42,7 +42,7 @@ void true_interval(const int min_l, const int max_l);
 * @param size - длинна массива.
 * @return возвращает значение максимального элемента массива
 */
-int find_min_el_mass(int* mass, const size_t size);
+int find_min_el_mass(const int* mass, const size_t size);
 
 /**
 * @brief функция для замены минимального элемента массива на центральный элемент того же массива
@@ -55,14 +55,14 @@ int* replace_min_el_mid_el(int* mass, const size_t size);
 * @brief функция для вывода индексов элементов, которые больше предыдущих
 * @param массив с которым мы работаем
 */
-void more_el_index_print(int* mass, const size_t size);
+void more_el_index_print(const int* mass, const size_t size);
 
 /**
 * @brief функция для определения присутствия хотя бы двух пар соседних элементов с одным и тем же знаком
 * @param массив с которым мы работаем
 * @return возвращает количество пар соседних элементов с одним знаком 
 */
-int two_pairs(int* mass, const size_t size);
+int two_pairs(const int* mass, const size_t size);
 
 /**
 * @brief Функция для ручного ввода элементов массива
@@ -89,7 +89,7 @@ void random_mass_input(int* mass, const size_t size, const int min_l, const int 
 * @param mass  массив.
 * @remarks Экстренное завершение программы, в случае неправильной длинны массива.
 */
-void true_mass(int* mass);
+void check_mass(const int* mass);
 
 /**
 * @brief проверяет вводимое значение
@@ -97,43 +97,57 @@ void true_mass(int* mass);
 */
 size_t input_size(void);
 
-int* copy_mass(int* const mass, const size_t size);
+/**
+* @brief копирует массив
+* @param mass - массив который нужно скопировать
+* @param size - длинна массива
+* @remarks возвращает новый массив идентичный копируемому
+*/
+int* copy_mass(const int* mass, const size_t size);
+
+/**
+ * @brief Функция создания массива
+ * @param размер создаваемого массива
+ * @return возвращает созданный по размеру массив
+ */
+int* create_mass(size_t const size);
 
 /**
 * @brief точка входа в программу
 * @return возвращает в случае успеха
 */
 int main(void) {
-	int input_choise = input("введите вариант ввода элементов массива (ручной - 1, рандомный - 2)");
-
 	int max_l = input("введите максимальное допустимое значение элемента массива");
 	int min_l = input("введите минимальное допустимое значение элемента массива");
 	true_interval(min_l, max_l);
 
 	const size_t size = input_size();
 
-	int* mass = (int*)malloc(size * sizeof(int));
+	int* mass = create_mass(size);
 	int* mass1 = copy_mass(mass, size);
-	switch (input_choise) {
+	switch (input("введите вариант ввода элементов массива (ручной - 1, рандомный - 2)")) {
 	case arms:
 		arm_mass_input(mass, size, min_l, max_l);
 	case random:
 		random_mass_input(mass, size, min_l, max_l);
 	}
-
 	replace_min_el_mid_el(mass1, size);
 
 	printf("ответ на задание 1:\t");
 	print_mass(mass1, size);
 
-	printf("ответ на задание 2:\t%d");
+	printf("\nответ на задание 2:\t");
 	more_el_index_print(mass, size);
 
-	printf("ответ на задание 3:%d\t", two_pairs(mass, size));
+	printf("\nответ на задание 3:%d\t", two_pairs(mass, size));
+	
+	return 0;
 }
 
 int input(const char* message) {
-	printf("%s", message);
+	if (message != NULL) {
+		printf("%s", message);
+	}
 	int number = 0;
 	if (scanf_s("%i", &number) != 1) {
 		printf("Input error");
@@ -142,7 +156,8 @@ int input(const char* message) {
 	return number;
 }
 
-int find_min_el_mass(int* mass, const size_t size){
+int find_min_el_mass(const int* mass, const size_t size){
+	check_mass(mass);
 	int min = mass[0];
 	for (size_t i = 1; i < size; ++i) {
 		if (mass[i] < min) {
@@ -153,21 +168,24 @@ int find_min_el_mass(int* mass, const size_t size){
 }
 
 int* replace_min_el_mid_el(int* mass1, const size_t size) {
+	check_mass(mass1);
 	int central_el = size/2;
 	int cent_num = mass1[central_el];
 	mass1[central_el] = find_min_el_mass(mass1, size);
 	return mass1;
 }
 
-void more_el_index_print(int* mass, const size_t size) {
+void more_el_index_print(const int* mass, const size_t size) {
+	check_mass(mass);
 	for (size_t i = 1; i < size; ++i) {
 		if (mass[i - 1] < mass[i]) {
-			printf("%i\t", i);
+			printf("%d\t", i);
 		}
 	}
 }
 
-int two_pairs(int* mass, const size_t size) {
+int two_pairs(const int* mass, const size_t size) {
+	check_mass(mass);
 	int value_pairs = 0;
 	for (size_t i = 1; i < size; ++i) {
 		if (mass[i]*mass[i-1] > 0){
@@ -177,8 +195,9 @@ int two_pairs(int* mass, const size_t size) {
 	return value_pairs;
 }
 
-void print_mass(int* mass, const size_t size)
+void print_mass(const int* mass, const size_t size)
 {
+	check_mass(mass);
 	for (size_t i = 0; i < size; i++)
 	{
 		printf("%d,",mass[i]);
@@ -218,7 +237,7 @@ void random_mass_input(int* mass, const size_t size, const int min_l, const int 
 	}
 }
 
-void true_mass(int* mass) {
+void check_mass(const int* mass) {
 	if (mass == NULL)
 	{
 		printf("Ошибка: недостаточно памяти.\n");
@@ -237,12 +256,19 @@ size_t input_size(void)
 	return (size_t)size;
 }
 
-int* copy_mass(int* const mass, const size_t size)
+int* copy_mass(const int* mass, const size_t size)
 {
-	int* mass1 = (int*)malloc(size * sizeof(int));
+	int* mass1 = create_mass(size);
 	for (size_t i = 0; i < size; i++)
 	{
 		mass1[i] = mass[i];
 	}
 	return mass1;
+}
+
+int* create_mass(size_t const size)
+{
+	int* mass = (int*)malloc(size * sizeof(int));
+	check_mass(mass);
+	return mass;
 }
