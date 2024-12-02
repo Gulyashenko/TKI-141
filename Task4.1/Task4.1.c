@@ -119,6 +119,8 @@ int* create_mass(size_t const size);
 * @return возвращает в случае успеха
 */
 int main(void) {
+	printf("Как Вы хотите заполнить массив ? \n % d - ручной ввод, % d - случайный ввод\n", arms, random);
+	int choose_input = input("");
 	int max_l = input("введите максимальное допустимое значение элемента массива");
 	int min_l = input("введите минимальное допустимое значение элемента массива");
 	true_interval(min_l, max_l);
@@ -126,7 +128,7 @@ int main(void) {
 	const size_t size = input_size();
 
 	int* mass = create_mass(size);
-	switch (input("введите вариант ввода элементов массива (ручной, рандомный)")) {
+	switch (choose_input) {
 	case arms:
 		arm_mass_input(mass, size, min_l, max_l);
 	case random:
