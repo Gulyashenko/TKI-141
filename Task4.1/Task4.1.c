@@ -1,4 +1,4 @@
-﻿﻿#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -17,6 +17,7 @@ enum mass_input_choise {
 
 /**
 * @brief проверяет вводимое значение (является ли числом)
+* @param сообщение которое нужно вывести перед вводом
 * @return возвращает введённое значение, если оно является числом
 */
 int input(const char* message);
@@ -47,19 +48,22 @@ int find_min_el_mass(const int* mass, const size_t size);
 /**
 * @brief функция для замены минимального элемента массива на центральный элемент того же массива
 * @param массив с которым мы работаем
+* @param размер массива
 * @return возвращает полученный массив
 */
-int* replace_min_el_mid_el(int* mass, const size_t size);
+void replace_min_el_mid_el(int* mass, const size_t size);
 
 /**
 * @brief функция для вывода индексов элементов, которые больше предыдущих
 * @param массив с которым мы работаем
+* @param размер массива
 */
 void more_el_index_print(const int* mass, const size_t size);
 
 /**
 * @brief функция для определения присутствия хотя бы двух пар соседних элементов с одным и тем же знаком
 * @param массив с которым мы работаем
+* @param размер массива
 * @return возвращает количество пар соседних элементов с одним знаком
 */
 int two_pairs(const int* mass, const size_t size);
@@ -68,7 +72,6 @@ int two_pairs(const int* mass, const size_t size);
 * @brief Функция для ручного ввода элементов массива
 * @param size длинна массива
 * @param mass массив
-* @param mass1 массив равный первому
 * @param min_l значение минимально допустимого значения элемента массива
 * @param max_l значение максимально допустимого значения элемента массива
 */
@@ -78,7 +81,6 @@ void arm_mass_input(int* mass, const size_t size, const int min_l, const int max
 * @brief Функция для рандомного ввода элементов массива
 * @param size длинна массива
 * @param mass массив
-* @param mass1 массив равный первому
 * @param min_l значение минимально допустимого значения элемента массива
 * @param max_l значение максимально допустимого значения элемента массива
 */
@@ -124,13 +126,14 @@ int main(void) {
 	const size_t size = input_size();
 
 	int* mass = create_mass(size);
-	int* mass1 = copy_mass(mass, size);
-	switch (input("введите вариант ввода элементов массива (ручной - 1, рандомный - 2)")) {
+	switch (input("введите вариант ввода элементов массива (ручной, рандомный)")) {
 	case arms:
 		arm_mass_input(mass, size, min_l, max_l);
 	case random:
 		random_mass_input(mass, size, min_l, max_l);
 	}
+	int* mass1 = copy_mass(mass, size);
+
 	replace_min_el_mid_el(mass1, size);
 
 	printf("ответ на задание 1:\t");
@@ -167,12 +170,11 @@ int find_min_el_mass(const int* mass, const size_t size) {
 	return min;
 }
 
-int* replace_min_el_mid_el(int* mass1, const size_t size) {
+void replace_min_el_mid_el(int* mass1, const size_t size) {
 	check_mass(mass1);
-	int central_el = size / 2;
+	size_t central_el = size / 2;
 	int cent_num = mass1[central_el];
 	mass1[central_el] = find_min_el_mass(mass1, size);
-	return mass1;
 }
 
 void more_el_index_print(const int* mass, const size_t size) {
@@ -259,8 +261,7 @@ size_t input_size(void)
 int* copy_mass(const int* mass, const size_t size)
 {
 	int* mass1 = create_mass(size);
-	for (size_t i = 0; i < size; i++)
-	{
+	for (size_t i = 0; i < size; i++) {
 		mass1[i] = mass[i];
 	}
 	return mass1;
